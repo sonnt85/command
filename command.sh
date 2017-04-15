@@ -22,8 +22,8 @@ function spawnew(){
     echo $! > $LOCKM_FILE;
     sleep 5
     rm -rf $TMPD;
-    kill -9 $oldshpid
-    kill -9 $oldpid
+    kill -9 $oldshpid &>/dev/null
+    kill -9 $oldpid  &>/dev/null
 }
 spawnew
 
