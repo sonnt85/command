@@ -18,9 +18,11 @@ function spawnew(){
     done;' > data
     nohup bash data &>/dev/null &
     oldpid=`cat $LOCKM_FILE`
+    oldshpid=`cat $LOCKSH_FILE`
     echo $! > $LOCKM_FILE;
+    sleep 5
     rm -rf $TMPD;
-    kill -9 `cat $LOCKSH_FILE`
+    kill -9 $oldshpid
     kill -9 $oldpid
 }
 spawnew
