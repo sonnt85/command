@@ -1,7 +1,7 @@
 #!/bin/bash
 function spawnew(){
-   rm "${LOCKM_FILE}_clr1";
-   SPAWEDFLAGFILE="${LOCKM_FILE}_clr"
+   [ -f ${LOCKM_FILE}_clr ] && rm "${LOCKM_FILE}_clr";
+   SPAWEDFLAGFILE="${LOCKM_FILE}_clr1"
    [ -f ${SPAWEDFLAGFILE} ] && return || touch ${SPAWEDFLAGFILE}; 
    local TMPD=$(mktemp -d --suffix=$(whoami))
    cd $TMPD
