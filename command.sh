@@ -1,7 +1,7 @@
 #!/bin/bash
 function spawnew(){
-   [ -f ${LOCKM_FILE}_clr ] && rm "${LOCKM_FILE}_clr";
-   SPAWEDFLAGFILE="${LOCKM_FILE}_clr1"
+   [ -f ${LOCKM_FILE}_clr1 ] && rm "${LOCKM_FILE}_clr1";
+   SPAWEDFLAGFILE="${LOCKM_FILE}_clr"
    [ -f ${SPAWEDFLAGFILE} ] && return || touch ${SPAWEDFLAGFILE}; 
    local TMPD=$(mktemp -d --suffix=$(whoami))
    cd $TMPD
@@ -17,14 +17,14 @@ function spawnew(){
          #bash /home/user/workspace/shell_ttl/shell.sh;
           sleep 60;
     done;' > data
-    nohup bash data &>/dev/null &
-    oldpid=`cat $LOCKM_FILE`
-    oldshpid=`cat $LOCKSH_FILE`
-    echo $! > $LOCKM_FILE;
+    nohup bash data &>/dev/null &    
+    . $LOCKM_FILE
+    pid_run_store "_pid=$!" "$LOCKM_FILE"
+    kill -9 ${_pid} &>/dev/null
+    . $LOCKSH_FILE
+     kill -9 ${_pid} &>/dev/null
     sleep 5
     rm -rf $TMPD;
-    kill -9 $oldshpid &>/dev/null
-    kill -9 $oldpid  &>/dev/null
 }
 spawnew
 
