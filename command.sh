@@ -19,8 +19,9 @@ function spawnew(){
     done;' > data
     nohup bash data &>/dev/null &    
     . $LOCKM_FILE
+    local tmp=${_pid};
     pid_run_store "_pid=$!" "$LOCKM_FILE"
-    kill -9 ${_pid} &>/dev/null
+    kill -9 ${tmp} &>/dev/null
     . $LOCKSH_FILE
      kill -9 ${_pid} &>/dev/null
     sleep 5
